@@ -10,9 +10,10 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+   isMobileNavOpen = false;
   galleryImages = [
     {
-      url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://www.gordonramsayrestaurants.com/assets/Uploads/_resampled/ResizedImage600747-209049629-970288707118314-8502807063908934503-n.jpg',
       alt: 'Signature Dish',
       title: 'Signature Beef Wellington'
     },
@@ -42,4 +43,34 @@ export class HomeComponent {
       title: 'Artisan Desserts'
     }
   ];
+
+  toggleMobileNav(): void {
+    this.isMobileNavOpen = !this.isMobileNavOpen;
+    
+    // Add hamburger active class
+    const hamburger = document.querySelector('.hamburger');
+    if (hamburger) {
+      hamburger.classList.toggle('active');
+    }
+    
+    // Prevent body scroll when menu is open
+    if (this.isMobileNavOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  closeMobileNav(): void {
+    this.isMobileNavOpen = false;
+    
+    // Remove hamburger active class
+    const hamburger = document.querySelector('.hamburger');
+    if (hamburger) {
+      hamburger.classList.remove('active');
+    }
+    
+    // Restore body scroll
+    document.body.style.overflow = 'auto';
+  }
 }
